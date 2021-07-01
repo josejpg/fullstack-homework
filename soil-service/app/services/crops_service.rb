@@ -18,7 +18,15 @@ class CropsService
     OATS,
   ].freeze
 
+  # Fetch all the crops
   def fetch_all_crops
     CROPS
+  end
+
+  # Retrieve a single crop by its value
+  def fetch_crop_by_value(crop_value)
+    crop = CROPS.select { |crop| crop.id === crop_value }
+    return crop unless crop.nil?
+    raise CropsError
   end
 end
