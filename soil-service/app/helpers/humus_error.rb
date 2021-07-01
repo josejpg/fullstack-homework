@@ -1,0 +1,2 @@
+class HumusError < StandardError
+end

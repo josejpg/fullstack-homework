@@ -1,0 +1,2 @@
+class FieldsError < StandardError
+end

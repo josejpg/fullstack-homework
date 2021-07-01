@@ -1,0 +1,2 @@
+class CropsError < StandardError
+end

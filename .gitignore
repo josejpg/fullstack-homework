@@ -7,3 +7,5 @@
 /soil-service/.bundle
 /soil-service/log/*
 /soil-service/tmp/*
+
+/.idea/
