@@ -14,7 +14,7 @@ class FieldsService
         { year: 2023, crop: CropsService::OATS },
         { year: 2024, crop: CropsService::WINTER_WHEAT },
       ],
-      hummus_balance: HumusService.instance.calculate_to_field(1)
+      humus_balance: 0
     },
     {
       id: 2,
@@ -27,7 +27,7 @@ class FieldsService
         { year: 2023, crop: CropsService::WINTER_WHEAT },
         { year: 2024, crop: CropsService::BROAD_BEAN },
       ],
-      hummus_balance: HumusService.instance.calculate_to_field(2)
+      humus_balance: 0
     },
     {
       id: 3,
@@ -40,19 +40,25 @@ class FieldsService
         { year: 2023, crop: CropsService::SPRING_WHEAT },
         { year: 2024, crop: CropsService::SPRING_WHEAT },
       ],
-      hummus_balance: HumusService.instance.calculate_to_field(3)
+      humus_balance: 0
     },
   ]
 
   # Fetch all the fields
   def fetch_fields
-    FIELDS
+    FIELDS.map do |field|
+      field[:humus_balance] = HumusService.instance.calculate_by_field_id(field[:id])
+      field
+    end
   end
 
   # Retrieve a field by its ID
   def fetch_field_by_id(field_id)
-    field = FIELDS.select { |field| field.id === field_id }
-    return field unless field.nil?
+   field = FIELDS.select { |search_field|
+     search_field[:id].to_i == field_id.to_i
+    }.first
+    Rails.logger.debug("fetch_field_by_id field => #{field}")
+    return field unless field.present? && field.empty?
     raise FieldsError
   end
 end
