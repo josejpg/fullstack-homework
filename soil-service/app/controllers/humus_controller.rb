@@ -1,5 +1,6 @@
 class HumusController < ActionController::Base
-  def index
+  skip_before_action :verify_authenticity_token, :only => [:update]
+  def update
     render json: HumusService.instance.calculate(request.body.read)
     rescue FieldsError
       render json: {
