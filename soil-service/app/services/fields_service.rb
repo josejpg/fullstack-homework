@@ -57,7 +57,6 @@ class FieldsService
    field = FIELDS.select { |search_field|
      search_field[:id].to_i == field_id.to_i
     }.first
-    Rails.logger.debug("fetch_field_by_id field => #{field}")
     return field unless field.present? && field.empty?
     raise FieldsError
   end
