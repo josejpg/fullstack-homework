@@ -57,7 +57,7 @@ class FieldsService
    field = FIELDS.select { |search_field|
      search_field[:id].to_i == field_id.to_i
     }.first
-    return field unless field.present? && field.empty?
+    return field unless field.nil?
     raise FieldsError
   end
 end
