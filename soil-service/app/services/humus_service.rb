@@ -6,12 +6,12 @@ class HumusService
 
   # Calculate humus balance for a field object
   def calculate(payload)
-    field = JSON.parse(payload, object_class: OpenStruct)
+    field = JSON.parse(payload, object_class: DataStruct)
     check_field_id = FieldsService.instance.fetch_field_by_id field[:id]
     raise FieldsError unless field.present? && !field.nil? && !field.empty?
     field["crops"] = calculate_deltas field[:crops]
     field["humus_balance"] = calculate_humus_balance field
-    field.as_json["table"]
+    field
   end
 
   # Calculate humus balance by a field ID

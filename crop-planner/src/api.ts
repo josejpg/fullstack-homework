@@ -8,3 +8,13 @@ export const fetchFields = async (): Promise<Array<Field>> =>
 export const fetchCrops = async (): Promise<Array<Crop>> =>
   await fetch(`${SOIL_SERVICE_URL}/crops`).then(response => response.json())
 
+export const fetchHumus = async (field: Field): Promise<Field> => {
+    const payload = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(field)
+    };
+    return await fetch(`${SOIL_SERVICE_URL}/humus`, payload).then(response => response.json());
+}
