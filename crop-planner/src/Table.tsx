@@ -47,16 +47,16 @@ export default class Table extends PureComponent<Props, State> {
 
   renderFieldRow = (field: Field) =>
     <div className="table__row" key={field.id}>
-      <div className="table__cell">{field.name}</div>
-      <div className="table__cell table__cell--right">{field.area}</div>
+      <div className="table__cell" key="name">{field.name}</div>
+      <div className="table__cell table__cell--right" key="area">{field.area}</div>
 
       {sortBy(field.crops, crop => crop.year).map(seasonalCrop => this.renderCropCell(field, seasonalCrop))}
 
-      <div className="table__cell table__cell--right">--</div>
+      <div className="table__cell table__cell--right" key="hummus_balance">{field.humus_balance}</div>
     </div>
 
   renderCropCell = (field: Field, seasonalCrop: SeasonalCrop) =>
-    <div className="table__cell table__cell--center table__cell--with-select">
+    <div className="table__cell table__cell--center table__cell--with-select" key={`year-${seasonalCrop.year}`}>
       <CropSelect
         selectedCrop={seasonalCrop.crop}
         allCrops={this.state.allCrops}
