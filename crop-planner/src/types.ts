@@ -12,3 +12,9 @@ export type Field = {
   crops: Array<SeasonalCrop>,
   humus_balance: number,
 }
+
+export type HumusStatus = {
+  fieldId: number,
+  better: boolean,
+  worst: boolean
+}
