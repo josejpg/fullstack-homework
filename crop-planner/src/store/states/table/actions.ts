@@ -1,4 +1,4 @@
-import {setCrops, setFields, setHumusState, setHumusStatus, setLoader, setOriginalFields} from "./reducer";
+import {setCrops, setFields, setHumusState, setHumusStatus, setLoader, setPrevFields} from "./reducer";
 import {Crop, Field, HumusStatus} from "../../../types";
 import {Dispatch} from "redux";
 import {fetchCrops, fetchFields, fetchHumus} from "../../../api";
@@ -15,11 +15,17 @@ export const dispatchFetchFields = () => {
                 };
             })
             dispatch(setFields(fields));
-            dispatch(setOriginalFields(fields));
+            dispatch(setPrevFields(fields));
             dispatch(setHumusStatus(humusStatus));
         } catch (e) {
             console.error(e)
         }
+    }
+}
+
+export const dispatchSavePrevFields = (payload: Field[]) => {
+    return async (dispatch: Dispatch) => {
+        dispatch(setPrevFields(payload));
     }
 }
 
@@ -40,27 +46,27 @@ export const dispatchLoading = (payload: boolean) => {
     }
 }
 
-export const dispatchFetchHumus = (allFields: Field[], field: Field, originalFields: Field[], humusStatus: HumusStatus[]) => {
+export const dispatchFetchHumus = (allFields: Field[], field: Field, prevFields: Field[], humusStatus: HumusStatus[]) => {
     dispatchLoading(true);
     return async (dispatch: Dispatch) => {
         try {
             fetchHumus(field).then((updatedField: Field) => {
-                const originalField = originalFields.find((field: Field) => field.id === updatedField.id);
-                const stateFields = {
+                const prevField = prevFields.find((field: Field) => field.id === updatedField.id);
+                const stateFields = [
                     ...allFields.map((field: Field) => {
                         return field.id === updatedField.id ? updatedField : field;
                     })
-                };
+                ];
 
-                if (originalField) {
+                if (prevField) {
                     let humusBalanceChanged: boolean = false;
                     let humusBalanceBetter: boolean = false;
                     let humusBalanceWorst: boolean = false;
 
-                    if (originalField.humus_balance !== updatedField.humus_balance) {
+                    if (prevField.humus_balance !== updatedField.humus_balance) {
                         humusBalanceChanged = true;
-                        humusBalanceBetter = originalField.humus_balance < updatedField.humus_balance;
-                        humusBalanceWorst = originalField.humus_balance > updatedField.humus_balance;
+                        humusBalanceBetter = prevField.humus_balance < updatedField.humus_balance;
+                        humusBalanceWorst = prevField.humus_balance > updatedField.humus_balance;
                     }
 
                     humusStatus = humusStatus.map((humusStatus: HumusStatus) => {

@@ -1,35 +1,35 @@
 import {createSlice, Draft} from "@reduxjs/toolkit";
 import {initialState, State} from "./state";
 
-const { actions, reducer } = createSlice({
+const {actions, reducer} = createSlice({
     name: 'table',
     initialState: initialState,
     reducers: {
-        setCrops: (state: Draft<State>, { payload }) => {
+        setCrops: (state: Draft<State>, {payload}) => {
             state.allCrops = payload
         },
-        setOriginalFields: (state: Draft<State>, { payload }) => {
-            state.originalFields = payload
+        setPrevFields: (state: Draft<State>, {payload}) => {
+            state.prevFields = payload
         },
-        setFields: (state: Draft<State>, { payload }) => {
+        setFields: (state: Draft<State>, {payload}) => {
             state.fields = payload
         },
-        setLoader: (state: Draft<State>, { payload }) => {
+        setLoader: (state: Draft<State>, {payload}) => {
             state.isLoading = payload
         },
-        setHumusStatus: (state: Draft<State>, { payload }) => {
+        setHumusStatus: (state: Draft<State>, {payload}) => {
             state.humusStatus = payload;
         },
-        setHumusBalanceChanged: (state: Draft<State>, { payload }) => {
+        setHumusBalanceChanged: (state: Draft<State>, {payload}) => {
             state.humusBalanceChanged = payload
         },
-        sethumusBalanceBetter: (state: Draft<State>, { payload }) => {
+        sethumusBalanceBetter: (state: Draft<State>, {payload}) => {
             state.humusBalanceBetter = payload
         },
-        setHumusBalanceWorst: (state: Draft<State>, { payload }) => {
+        setHumusBalanceWorst: (state: Draft<State>, {payload}) => {
             state.humusBalanceWorst = payload
         },
-        setHumusState: (state: Draft<State>, { payload }) => {
+        setHumusState: (state: Draft<State>, {payload}) => {
             state.humusStatus = payload.humusStatus;
             state.humusBalanceChanged = payload.humusBalanceChanged
             state.humusBalanceBetter = payload.humusBalanceBetter
@@ -42,7 +42,7 @@ export default reducer;
 
 export const {
     setCrops,
-    setOriginalFields,
+    setPrevFields,
     setFields,
     setLoader,
     setHumusStatus,

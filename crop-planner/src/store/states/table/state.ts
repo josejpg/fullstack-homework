@@ -2,7 +2,7 @@ import {Crop, Field, HumusStatus} from "../../../types";
 
 export type State = {
     allCrops: Array<Crop>,
-    originalFields: Array<Field>,
+    prevFields: Array<Field>,
     fields: Array<Field>,
     isLoading: boolean,
     humusStatus: HumusStatus[],
@@ -13,7 +13,7 @@ export type State = {
 export type StateReducer = {
     table: {
         allCrops: Array<Crop>,
-        originalFields: Array<Field>,
+        prevFields: Array<Field>,
         fields: Array<Field>,
         isLoading: boolean,
         humusStatus: HumusStatus[],
@@ -25,7 +25,7 @@ export type StateReducer = {
 
 export const initialState = {
     allCrops: [],
-    originalFields: [],
+    prevFields: [],
     fields: [],
     isLoading: true,
     humusStatus: [],

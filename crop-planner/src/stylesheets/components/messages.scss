@@ -1,4 +1,5 @@
-.secondSnackbar {
-  bottom: 72px !important;
-  margin-bottom: 5px;
+.snackbar {
+  position: relative !important;
+  transform: translate(-50%, 100%) !important;;
+  margin-bottom: 5px !important;;
 }

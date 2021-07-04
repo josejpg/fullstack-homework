@@ -2,7 +2,7 @@ import {StateReducer} from "./state";
 import {Crop, Field, HumusStatus} from "../../../types";
 
 export const selectAllCrops = (state: StateReducer) => state.table.allCrops as Crop[];
-export const selectOriginalFields = (state: StateReducer) => state.table.originalFields as Field[];
+export const selectOriginalFields = (state: StateReducer) => state.table.prevFields as Field[];
 export const selectFields = (state: StateReducer) => state.table.fields as Field[]
 export const selectLoading = (state: StateReducer) => state.table.isLoading as boolean;
 export const selectHumusSatus = (state: StateReducer) => state.table.humusStatus as HumusStatus[];

@@ -56,7 +56,8 @@ export const RenderMessage = () => {
                 open={true}
                 key="standardMessage"
                 autoHideDuration={6000}
-                onClose={handleClose}>
+                onClose={handleClose}
+                className="snackbar">
                 <RenderSuccessMessage message={standardMessage}/>
             </Snackbar>
         );
@@ -69,7 +70,7 @@ export const RenderMessage = () => {
                     key={vertical + horizontal}
                     autoHideDuration={6000}
                     onClose={handleClose}
-                    className="secondSnackbar">
+                    className="snackbar">
                     {message}
                 </Snackbar>
             );

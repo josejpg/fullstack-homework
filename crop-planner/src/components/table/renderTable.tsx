@@ -10,25 +10,25 @@ export const RenderTable = () => {
 
     if (isLoading) {
         table = (
-            <div className="table">
+            <div className="table" key="emptyTable">
             </div>
         );
     } else {
         table = (
             <div className="table" key="table">
                 <div className="table__row table__row--header" key="table__row--header">
-                    <div className="table__cell" key="fieldNameHeader">Field name</div>
-                    <div className="table__cell table__cell--right" key="fieldAreaHeader">Field area (ha)</div>
-                    <div className="table__cell table__cell--center" key="crop2020Header">2020 crop</div>
-                    <div className="table__cell table__cell--center" key="crop2021Header">2021 crop</div>
-                    <div className="table__cell table__cell--center" key="crop2022Header">2022 crop</div>
-                    <div className="table__cell table__cell--center" key="crop2023Header">2023 crop</div>
-                    <div className="table__cell table__cell--center" key="crop2024Header">2024 crop</div>
-                    <div className="table__cell table__cell--right" key="humusBalanceHeader">Humus balance</div>
+                    <div className="table__cell" key="table__row--header-name">Field name</div>
+                    <div className="table__cell table__cell--right" key="table__row--header-area">Field area (ha)</div>
+                    <div className="table__cell table__cell--center" key="table__row--header-2020-crop">2020 crop</div>
+                    <div className="table__cell table__cell--center" key="table__row--header-2021-crop">2021 crop</div>
+                    <div className="table__cell table__cell--center" key="table__row--header-2022-crop">2022 crop</div>
+                    <div className="table__cell table__cell--center" key="table__row--header-2023-crop">2023 crop</div>
+                    <div className="table__cell table__cell--center" key="table__row--header-2024-crop">2024 crop</div>
+                    <div className="table__cell table__cell--right" key="table__row--header-humus-balance">Humus balance</div>
                 </div>
 
                 {sortBy(fields, field => field.name).map(field => {
-                    return <RenderFieldRow field={field}/>
+                    return <RenderFieldRow field={field} key={`renderFieldRow_${field.id}`}/>
                 })}
             </div>
         )
