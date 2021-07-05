@@ -5,7 +5,8 @@ class HumusService
   CROP_CONSECUTIVE_YEAR_COEFFICIENT = 1.3
 
   # Calculate humus balance for a field object
-  def calculate(payload)
+  def calculate(payload=nil)
+    raise HumusError::BadRequest unless payload.present? && !payload.nil? && !payload.empty?
     field = JSON.parse(payload, symbolize_names: true)
     check_field_id = FieldsService.instance.fetch_field_by_id field[:id]
     raise FieldsError::NotFound unless field.present? && !field.nil? && !field.empty?

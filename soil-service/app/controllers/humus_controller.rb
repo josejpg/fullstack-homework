@@ -17,10 +17,10 @@ class HumusController < ActionController::Base
         error: true,
         message: 'Crops are not correct',
       }, status: 400
-    rescue HumusError::Exception
+    rescue HumusError::BadRequest
       render json: {
         error: true,
-        message: 'Humus error',
+        message: 'Payload is not correct',
       }, status: 400
   end
 end
