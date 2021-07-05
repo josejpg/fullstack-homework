@@ -58,6 +58,6 @@ class FieldsService
      search_field[:id].to_i == field_id.to_i
     }.first
     return field unless field.nil?
-    raise FieldsError
+    raise FieldsError::NotFound
   end
 end

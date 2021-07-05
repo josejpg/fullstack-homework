@@ -27,6 +27,6 @@ class CropsService
   def fetch_crop_by_value(crop_value)
     crop = CROPS.select { |crop| crop[:value].to_i === crop_value.to_i }.first
     return crop unless crop.nil?
-    raise CropsError
+    raise CropsError::NotFound
   end
 end

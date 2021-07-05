@@ -2,17 +2,22 @@ class HumusController < ActionController::Base
   skip_before_action :verify_authenticity_token, :only => [:create]
   def create
     render json: HumusService.instance.calculate(request.body.read)
-    rescue FieldsError
+    rescue FieldsError::NotFound
       render json: {
         error: true,
         message: 'Field not found',
       }, status: 404
-    rescue CropsError
+    rescue CropsError::NotFound
       render json: {
         error: true,
         message: 'Crop not found',
       }, status: 404
-    rescue HumusError
+    rescue CropsError::BadRequest
+      render json: {
+        error: true,
+        message: 'Crops are not correct',
+      }, status: 400
+    rescue HumusError::Exception
       render json: {
         error: true,
         message: 'Humus error',

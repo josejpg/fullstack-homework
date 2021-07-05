@@ -1,2 +1,4 @@
-class HumusError < StandardError
+module HumusError
+  class Exception < StandardError
+  end
 end
