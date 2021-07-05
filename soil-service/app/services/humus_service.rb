@@ -24,13 +24,13 @@ class HumusService
 
   # Calculate deltas for a crops list
   def calculate_deltas(crops)
-    crops.each_with_index.map do |yearly_crop, i|
-      curr_crop = yearly_crop[:crop].dup
+    crops.each_with_index.map do |seasonalCrop, i|
+      curr_crop = seasonalCrop[:crop].dup
       check_crop_id = CropsService.instance.fetch_crop_by_value curr_crop[:value]
       if i > 0
-        prev_yearly_crop = crops[i-1]
-        unless prev_yearly_crop.nil?
-          prev_crop = prev_yearly_crop[:crop]
+        prevSeasonalCrop = crops[i-1]
+        unless prevSeasonalCrop.nil?
+          prev_crop = prevSeasonalCrop[:crop]
           # If current crop is the same as previous,
           # the current delta is the previous one multiplied by the coefficient
           #
@@ -40,15 +40,15 @@ class HumusService
         end
       end
       curr_crop[:humus_delta] = curr_crop[:humus_delta].to_f.round(2)
-      yearly_crop[:crop] = curr_crop
-      yearly_crop
+      seasonalCrop[:crop] = curr_crop
+      seasonalCrop
     end
   end
 
   # Calculate humus balance for a field
   def calculate_humus_balance(field)
-    field[:crops].reduce(INITIAL_HUMUS) do |balance, yearly_crop|
-      balance + yearly_crop[:crop][:humus_delta]
+    field[:crops].reduce(INITIAL_HUMUS) do |balance, seasonalCrop|
+      balance + seasonalCrop[:crop][:humus_delta]
     end
   end
 end
