@@ -15,7 +15,7 @@ class HumusController < ActionController::Base
     rescue CropsError::BadRequest
       render json: {
         error: true,
-        message: 'Crops are not correct',
+        message: 'Some crops are missing',
       }, status: 400
     rescue HumusError::BadRequest
       render json: {
