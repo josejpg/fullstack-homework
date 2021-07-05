@@ -28,7 +28,7 @@ describe('<RenderHTML />', () => {
         await act(async () => {
             render(<RenderHTML html="<strong>Your humus balance is now <i>better</i></strong>"/>, container);
         });
-        expect(container.innerHTML).toEqual(<span><strong>Your humus balance is now <i>better</i></strong></span>);
+        expect(container.innerHTML).toEqual("<span><strong>Your humus balance is now <i>better</i></strong></span>");
         expect(container.textContent).toContain("Your humus balance is now better");
     });
 })

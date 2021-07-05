@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import Table from './Table'
 import { fetchCrops, fetchFields } from '../../api'
 
-jest.mock('./api')
+jest.mock('../../api')
 
 describe('<Table />', () => {
   const crops = [{ value: 1, label: 'Crop 1', humus_delta: 1 }]
